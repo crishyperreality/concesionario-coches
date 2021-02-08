@@ -1,0 +1,10 @@
+<div class="cards-container">
+    <ng-container *ngFor="let item of coches">
+        <div class="card" (click)="mostarCocheClick(item)" [ngClass]="{vendido: item.vendido}">
+            <p class="card-item"><span class="label">Marca</span> <span class="value">{{item.marca}}</span></p>
+            <p class="card-item"><span class="label">Modelo</span> <span class="value">{{item.modelo}}</span></p>
+            <p class="card-item"><span class="label">Potencia</span> <span class="value">{{item.potencia}}</span></p>
+            <p class="card-item"><span class="label">Precio</span> <span class="value">{{item.precio}}</span></p>
+        </div>
+    </ng-container>
+</div>
