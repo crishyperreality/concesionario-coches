@@ -5,6 +5,7 @@ import { CochesListComponent } from './coches-list/coches-list.component';
 import { CocheDetailComponent } from './coche-detail/coche-detail.component';
 import { CochesTableComponent } from './coches-list/coches-table/coches-table.component';
 import { CochesCardListComponent } from './coches-list/coches-card-list/coches-card-list.component';
+import { HighlightDirective } from './highlight.directive';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { CochesCardListComponent } from './coches-list/coches-card-list/coches-c
     CochesListComponent,
     CocheDetailComponent,
     CochesTableComponent,
-    CochesCardListComponent
+    CochesCardListComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule
