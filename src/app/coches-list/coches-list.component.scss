@@ -48,6 +48,10 @@
     }
 }
 
+.cards-container {
+    // width: 300px;
+    // overflow-y: scroll;
+}
 .card {
     box-shadow: 1px 2px 2px 1px #23232350;
     padding: 20px;
@@ -78,4 +82,8 @@
             color: darkgreen;
         }
     }
+}
+
+.vendido {
+    border: 1px solid red;
 }
