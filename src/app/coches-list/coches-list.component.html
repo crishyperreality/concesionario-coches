@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Listado de coches</h1>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Potencia</th>
+            <th>Precio</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of coches" (click)="mostarCocheClick($event, item)"  >
+                <td>{{item.id}}</td>
+                <td>{{item.marca}}</td>
+                <td>{{item.modelo}}</td>
+                <td>{{item.potencia}}</td>
+                <td>{{item.precio}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
