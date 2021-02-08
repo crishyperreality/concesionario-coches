@@ -11,6 +11,8 @@ export class CochesListComponent implements OnInit {
   @Input() coches: Coche[];
   @Output() cocheSeleccionado = new EventEmitter<Coche>();
 
+  verTabla = true;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -20,5 +22,13 @@ export class CochesListComponent implements OnInit {
     console.log(event);
     console.log(coche);
     this.cocheSeleccionado.emit(coche);
+  }
+
+  mostrarTarjetas(): void {
+    this.verTabla = false;
+  }
+
+  mostrarTabla(): void {
+    this.verTabla = true;
   }
 }

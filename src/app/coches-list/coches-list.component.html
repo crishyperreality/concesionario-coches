@@ -1,6 +1,10 @@
 <div class="container">
     <h1>Listado de coches</h1>
-    <table>
+    <div class="buttons">
+        <button (click)="mostrarTarjetas()">Mostrar Datos en Formato Tarjeta</button>
+        <button (click)="mostrarTabla()">Mostrar Datos en Formato Tabla</button>
+    </div>
+    <table *ngIf="verTabla;else tarjetas">
         <thead>
             <th>Id</th>
             <th>Marca</th>
@@ -9,7 +13,7 @@
             <th>Precio</th>
         </thead>
         <tbody>
-            <tr *ngFor="let item of coches" (click)="mostarCocheClick($event, item)"  >
+            <tr *ngFor="let item of coches" (click)="mostarCocheClick($event, item)">
                 <td>{{item.id}}</td>
                 <td>{{item.marca}}</td>
                 <td>{{item.modelo}}</td>
@@ -18,4 +22,13 @@
             </tr>
         </tbody>
     </table>
+    <ng-template #tarjetas>
+        <div *ngFor="let item of coches" (click)="mostarCocheClick($event, item)">
+            <p>{{item.id}}</p>
+            <p>{{item.marca}}</p>
+            <p>{{item.modelo}}</p>
+            <p>{{item.potencia}}</p>
+            <p>{{item.precio}}</p>
+        </div>
+    </ng-template>
 </div>
