@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Coche } from '../model/coche';
 
 @Component({
@@ -6,12 +6,23 @@ import { Coche } from '../model/coche';
   templateUrl: './coches-list.component.html',
   styleUrls: ['./coches-list.component.scss']
 })
-export class CochesListComponent implements OnInit, OnChanges {
+export class CochesListComponent implements OnInit {
 
 
   cochesFiltrados: Coche[] = [];
 
-  @Input() coches: Coche[];
+
+  private _coches: Coche[] = [];
+
+  @Input() set coches(value: Coche[]) {    
+    this._coches = value;
+    this.filtrarCoches();
+  }
+
+  get coches(): Coche[] {
+    return this._coches;
+  }
+
   @Output() cocheSeleccionado = new EventEmitter<Coche>();
 
   verTabla = true;
@@ -20,11 +31,12 @@ export class CochesListComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.coches) {    
-      this.filtrarCoches();
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes.coches) {
+  //     console.log('set coches ngOnChanges');
+  //     this.filtrarCoches();
+  //   }
+  // }
 
   ngOnInit(): void {
   }
