@@ -5,15 +5,16 @@
 
     .buttons {
         margin-bottom: 20px;
+        display: flex;
+        flex-direction: row-reverse;
         button {
             padding: 10px;
-            background-color: crimson;
-            color: white;
+            color: crimson;
+            border: 1px solid crimson;
             margin-right: 20px;
+            background-color: white;
             &:hover {
-                color: crimson;
-                background: white;
-                border: 1px solid crimson;
+                text-decoration: underline;
                 cursor: pointer;
             }
         }
