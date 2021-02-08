@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         <ng-container *ngFor="let item of coches">
-            <tr *ngIf="item.visible" (click)="cocheSeleccionado.emit(item)" [ngClass]="{vendido: item.vendido}">
+            <tr (click)="cocheSeleccionado.emit(item)" [ngClass]="{vendido: item.vendido}">
                 <td>{{item.id}}</td>
                 <td>{{item.marca}}</td>
                 <td>{{item.modelo}}</td>
