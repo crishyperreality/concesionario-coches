@@ -4,27 +4,6 @@
         <button *ngIf="verTabla" (click)="mostrarTarjetas()">Mostrar tarjetas</button>
         <button *ngIf="!verTabla" (click)="mostrarTabla()">Mostrar tabla</button>
     </div>
-    <table *ngIf="verTabla;else tarjetas">
-        <thead>
-            <th>Id</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Potencia</th>
-            <th>Precio</th>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let item of coches">
-                <tr *ngIf="item.visible" (click)="mostarCocheClick($event, item)" [ngClass]="{vendido: item.vendido}">
-                    <td>{{item.id}}</td>
-                    <td>{{item.marca}}</td>
-                    <td>{{item.modelo}}</td>
-                    <td>{{item.potencia}}</td>
-                    <td>{{item.precio}}</td>
-                </tr>
-            </ng-container>
-        </tbody>
-    </table>
-    <ng-template #tarjetas>
-        <app-coches-card-list [coches]="coches" ></app-coches-card-list>
-    </ng-template>
+    <app-coches-table *ngIf="verTabla" [coches]="coches" (cocheSeleccionado)="cocheSeleccionado.emit($event)"></app-coches-table>
+    <app-coches-card-list *ngIf="!verTabla" [coches]="coches"  (cocheSeleccionado)="mostrarCocheClick($event)"></app-coches-card-list>
 </div>

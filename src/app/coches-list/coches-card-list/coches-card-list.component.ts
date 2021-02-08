@@ -11,12 +11,13 @@ export class CochesCardListComponent implements OnInit {
 
   @Input() coches: Coche[];
   @Output() cocheSeleccionado = new EventEmitter<Coche>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  mostarCocheClick(coche: Coche): void {
+  mostarCocheClick(coche: Coche): void {    
     this.cocheSeleccionado.emit(coche);
   }
 

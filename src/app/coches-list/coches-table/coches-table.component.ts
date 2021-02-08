@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Coche } from 'src/app/model/coche';
 
 @Component({
   selector: 'app-coches-table',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CochesTableComponent implements OnInit {
 
+  @Input() coches: Coche[];
+  @Output() cocheSeleccionado = new EventEmitter<Coche>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

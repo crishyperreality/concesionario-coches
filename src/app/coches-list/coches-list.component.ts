@@ -18,9 +18,7 @@ export class CochesListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  mostarCocheClick(event: Event, coche: Coche): void {
-    console.log(event);
-    console.log(coche);
+  mostrarCocheClick(coche: Coche): void {
     this.cocheSeleccionado.emit(coche);
   }
 

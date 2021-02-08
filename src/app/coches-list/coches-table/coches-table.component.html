@@ -1,1 +1,20 @@
-<p>coches-table works!</p>
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Potencia</th>
+        <th>Precio</th>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of coches">
+            <tr *ngIf="item.visible" (click)="cocheSeleccionado.emit(item)" [ngClass]="{vendido: item.vendido}">
+                <td>{{item.id}}</td>
+                <td>{{item.marca}}</td>
+                <td>{{item.modelo}}</td>
+                <td>{{item.potencia}}</td>
+                <td>{{item.precio}}</td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
