@@ -11,9 +11,23 @@
             width: 33%;
         }
     }
-    
+
     span {
         font-weight: bold;
         margin-right: 15px;
+
+        &.highlight {
+            &:hover {
+                background-color: yellowgreen;
+            }
+        }
+    }
+
+    .div-high-ligh {
+        span {
+            &:hover {
+                background-color: yellowgreen;
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ export class Coche {
     vendido: Boolean;
     fecha: string;
     precio: number;
+    color?: string = '';
 
     constructor() {
     }

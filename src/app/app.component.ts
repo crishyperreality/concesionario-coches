@@ -38,6 +38,7 @@ export class AppComponent {
       vendido: false,
       fecha: '2021/01/10',
       precio: 35000,
+      color: 'red'
     },
     {
       id: '4',
@@ -50,7 +51,8 @@ export class AppComponent {
       visible: true,
       vendido: false,
       fecha: '2021-01-11',
-      precio: 15000
+      precio: 15000,
+      color: 'green'
     }];
 
     this.coches.push({
@@ -65,7 +67,6 @@ export class AppComponent {
       vendido: false,
       fecha: '2021/01/10',
       precio: 50000,
-
     });
     this.coches.push({
       id: '6',
@@ -79,6 +80,7 @@ export class AppComponent {
       vendido: false,
       fecha: '2021/01/10',
       precio: 50000,
+      color: 'blue'
 
     });
     this.coches.push({
@@ -93,6 +95,7 @@ export class AppComponent {
       vendido: true,
       fecha: '2021/01/10',
       precio: 50000,
+      color: 'pink'
 
     });
     this.coches.push({
@@ -107,7 +110,7 @@ export class AppComponent {
       vendido: false,
       fecha: '2021/01/10',
       precio: 15000,
-
+      color: ''
     });
     this.coches.push({
       id: '10',
@@ -121,7 +124,7 @@ export class AppComponent {
       vendido: false,
       fecha: '2021/01/10',
       precio: 22000,
-
+      color: 'orange'
     });
   }
 
