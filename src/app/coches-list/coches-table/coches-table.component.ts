@@ -15,4 +15,9 @@ export class CochesTableComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  seleccionClick(event: Coche): void {
+    event.vendido = !event.vendido;
+   //  alert(`Se ha seleccionado el coche ${event.modelo}`);
+  }
 }

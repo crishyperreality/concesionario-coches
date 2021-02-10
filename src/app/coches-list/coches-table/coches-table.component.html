@@ -15,8 +15,7 @@
                 <td [appHighlight]="item.color" [color]="'purple'" [size]="'40px'"  >{{item.modelo}}</td>
                 <td>{{item.potencia}}</td>
                 <td>{{item.precio}}</td>
-                <td [appCocheEstado]="item.vendido">
-                    <!-- <i class="fa fa-lock"></i> -->
+                <td [appCocheEstado]="item.vendido" (clicked)="seleccionClick(item)">                    
                 </td>
             </tr>
         </ng-container>

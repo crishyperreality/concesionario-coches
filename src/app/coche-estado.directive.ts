@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appCocheEstado]'
@@ -6,6 +6,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 export class CocheEstadoDirective implements OnInit {
 
   @Input() appCocheEstado = false;
+  @Output() clicked = new EventEmitter<string>();
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
   }
@@ -13,18 +14,14 @@ export class CocheEstadoDirective implements OnInit {
   ngOnInit(): void {
     // <i class="fa fa-lock"></i> 
     const icon = this.renderer.createElement('i'); // <i></i>
-
-    // if (this.appCocheEstado) {
-    //   this.renderer.addClass(icon, 'fa-lock');
-    //   this.renderer.setStyle(icon, 'color', 'red');
-    // } else {
-    //   this.renderer.addClass(icon, 'fa-lock-open');
-    //   this.renderer.setStyle(icon, 'color', 'green');
-    // }
-
     this.renderer.addClass(icon, 'fa');
     this.renderer.addClass(icon, this.dameClaseFA());
     this.renderer.setStyle(icon, 'color', this.dameColor());
+
+
+    this.renderer.listen(icon, 'click', (e) => {      
+       this.clicked.emit('Hola que tal');
+    });
 
     this.renderer.appendChild(this.el.nativeElement, icon); // <td><i></i></td>
   }
