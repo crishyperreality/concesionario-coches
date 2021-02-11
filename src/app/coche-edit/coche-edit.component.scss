@@ -60,4 +60,8 @@
         cursor: pointer;
         font-weight: bold;
     }
+
+    &:disabled{
+        background-color: gray;
+    }
 }

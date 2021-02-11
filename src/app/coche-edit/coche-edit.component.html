@@ -48,6 +48,6 @@
                 <input type="color" formControlName="color">
             </div>
         </div>
-        <button class="btn" type="submit">Grabar</button>
+        <button class="btn" type="submit" [disabled]="cocheForm.invalid" >Grabar</button>
     </form>
 </div>

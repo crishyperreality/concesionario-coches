@@ -42,7 +42,7 @@ export class CocheEditComponent implements OnInit, OnChanges {
       visible: [''],
       vendido: [''],
       fecha: [''],
-      precio: ['', Validators.required],
+      precio: ['', [Validators.required, Validators.min(10000)]],
       color: [''],
     });
   }
@@ -61,7 +61,7 @@ export class CocheEditComponent implements OnInit, OnChanges {
     if (this.cocheForm.invalid){
       alert('El formulario no es valido');
     } 
-    
+
     console.log(this.cocheForm.value);
   }
 
