@@ -8,7 +8,7 @@ export class Coche {
     oferta: boolean;
     visible: boolean;
     vendido: Boolean;
-    fecha: string;
+    fecha: Date;
     precio: number;
     color?: string = '';
 

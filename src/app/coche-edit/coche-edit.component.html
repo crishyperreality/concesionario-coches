@@ -4,11 +4,11 @@
 
         <div class="row">
             <div class="field-element">
-                <label>Marca</label>
+                <label>Marca <span>*</span></label>
                 <input type="text" formControlName="marca">
             </div>
             <div class="field-element">
-                <label>Modelo</label>
+                <label>Modelo <span>*</span></label>
                 <input type="text" formControlName="modelo">
             </div>
             <div class="field-element">
@@ -22,6 +22,30 @@
             <div class="field-element">
                 <label>Potencia</label>
                 <input type="number" formControlName="potencia">
+            </div>        
+            <div class="field-element">
+                <label>En oferta</label>
+                <input type="checkbox" formControlName="oferta">
+            </div>
+            <div class="field-element">
+                <label>Es Visible</label>
+                <input type="checkbox" formControlName="visible">
+            </div>
+            <div class="field-element">
+                <label>Esta Vendido</label>
+                <input type="checkbox" formControlName="vendido">
+            </div>
+            <div class="field-element">
+                <label>Fecha de Alta</label>
+                <input type="date" formControlName="fecha">
+            </div>
+            <div class="field-element">
+                <label>Precio <span>*</span></label>
+                <input type="number" formControlName="precio">
+            </div>
+            <div class="field-element">
+                <label>Color</label>
+                <input type="color" formControlName="color">
             </div>
         </div>
         <button class="btn" type="submit">Grabar</button>

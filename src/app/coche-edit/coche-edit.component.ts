@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Coche } from '../model/coche';
 
 @Component({
@@ -12,18 +12,38 @@ export class CocheEditComponent implements OnInit, OnChanges {
   cocheForm: FormGroup;
 
   @Input() set coche(v: Coche) {
-    if (v){
+    if (v) {
       this.loadCoche(v);
     }
   };
 
-  constructor() {
-    this.cocheForm = new FormGroup({
-      marca2: new FormControl(''),
-      modelo: new FormControl(''),
-      puertas: new FormControl(''),
-      tipoDeCoche: new FormControl(''),
-      potencia: new FormControl('')
+  constructor(private fb: FormBuilder) {
+    // this.cocheForm = new FormGroup({
+    //   marca: new FormControl(''),
+    //   modelo: new FormControl(''),
+    //   puertas: new FormControl(''),
+    //   tipoDeCoche: new FormControl(''),
+    //   potencia: new FormControl(''),
+    //   oferta: new FormControl(''),
+    //   visible: new FormControl(''),
+    //   vendido: new FormControl(''),
+    //   fecha: new FormControl(''),
+    //   precio: new FormControl(''),
+    //   color: new FormControl('')
+    // });
+
+    this.cocheForm = fb.group({
+      marca: ['', Validators.required],
+      modelo: ['', Validators.required],
+      puertas: [''],
+      tipoDeCoche: [''],
+      potencia: [''],
+      oferta: [''],
+      visible: [''],
+      vendido: [''],
+      fecha: [''],
+      precio: ['', Validators.required],
+      color: [''],
     });
   }
 
@@ -38,11 +58,17 @@ export class CocheEditComponent implements OnInit, OnChanges {
   }
 
   grabar(): void {
+    if (this.cocheForm.invalid){
+      alert('El formulario no es valido');
+    } 
+    
     console.log(this.cocheForm.value);
   }
 
-  private loadCoche(value: Coche): void{
+  private loadCoche(value: Coche): void {
+    console.log(value);
     this.cocheForm.patchValue(value);
+    // this.cocheForm.controls.fecha.setValue('1-2-2020');
     // this.cocheForm.controls.marca.setValue(value.marca);
     // this.cocheForm.controls.modelo.setValue(value.modelo);
     // this.cocheForm.controls.puertas.setValue(value.puertas);

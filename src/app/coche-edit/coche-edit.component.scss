@@ -1,4 +1,4 @@
-.container{
+.container {
     box-shadow: 1px 2px 2px 1px #23232350;
     padding: 20px;
     border-radius: 5px;
@@ -16,8 +16,18 @@
     margin-right: 20px;
     margin-bottom: 20px;
 
+    .ng-invalid {
+        &.ng-dirty {
+            color: red;
+            border-color: red;
+        }
+    }
+
     label {
         text-transform: uppercase;
+        span {
+            color: red;
+        }
     }
 
     input {
