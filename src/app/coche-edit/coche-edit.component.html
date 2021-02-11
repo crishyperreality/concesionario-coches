@@ -1,0 +1,23 @@
+<form [formGroup]="cocheForm" (ngSubmit)="grabar()">
+    <div>
+        <label>Marca</label>
+        <input type="text" formControlName="marca">
+    </div>
+    <div>
+        <label>Modelo</label>
+        <input type="text" formControlName="modelo">
+    </div>
+    <div>
+        <label>Numero de Puertas</label>
+        <input type="number" formControlName="puertas">
+    </div>
+    <div>
+        <label>Tipo de Coche</label>
+        <input type="text" formControlName="tipoDeCoche">
+    </div>
+    <div>
+        <label>Potencia</label>
+        <input type="number" formControlName="potencia">
+    </div>
+    <button type="submit">Grabar</button>
+</form>
