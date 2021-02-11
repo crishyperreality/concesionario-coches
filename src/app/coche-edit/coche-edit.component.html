@@ -3,13 +3,14 @@
     <form [formGroup]="cocheForm" (ngSubmit)="grabar()">
 
         <div class="row">
-            <div class="field-element">
+            <div class="field-element" [ngClass]="{'error': cocheForm.controls.marca.invalid && submitted }" >
                 <label>Marca <span>*</span></label>
                 <input type="text" formControlName="marca">
             </div>
-            <div class="field-element">
+            <div class="field-element" [ngClass]="{'error': cocheForm.controls.modelo.invalid && submitted }">
                 <label>Modelo <span>*</span></label>
                 <input type="text" formControlName="modelo">
+                <div class="error" *ngIf="cocheForm.controls.modelo.hasError('minlength')">El modelo require de al menos 5 caracteres</div>
             </div>
             <div class="field-element">
                 <label>Numero de Puertas</label>
@@ -51,15 +52,22 @@
                 <label>Fecha de Alta</label>
                 <input type="date" formControlName="fecha">
             </div>
-            <div class="field-element">
+            <div class="field-element" [ngClass]="{'error': cocheForm.controls.modelo.invalid && submitted }">
                 <label>Precio <span>*</span></label>
                 <input type="number" formControlName="precio">
+                <div class="error" *ngIf="cocheForm.controls.precio.hasError('min')">El precio tiene que ser mayor que 10000 €</div>
             </div>
             <div class="field-element">
                 <label>Color</label>
                 <input type="color" formControlName="color">
             </div>
         </div>
-        <button class="btn" type="submit" [disabled]="cocheForm.invalid">Grabar</button>
+        <!-- <div class="error" *ngIf="cocheForm.invalid && cocheForm.touched">
+            El formulario esta incompleto o tiene errores
+        </div> -->
+        <div>
+            <button class="btn" type="submit">Grabar</button>
+            <button class="btn" type="button" (click)="limpiar()">Limpiar</button>
+        </div>
     </form>
 </div>

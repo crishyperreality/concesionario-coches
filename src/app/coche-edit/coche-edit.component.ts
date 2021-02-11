@@ -10,6 +10,7 @@ import { Coche } from '../model/coche';
 export class CocheEditComponent implements OnInit, OnChanges {
 
   cocheForm: FormGroup;
+  submitted = false;
 
   @Input() set coche(v: Coche) {
     if (v) {
@@ -58,11 +59,17 @@ export class CocheEditComponent implements OnInit, OnChanges {
   }
 
   grabar(): void {
-    if (this.cocheForm.invalid){
-      alert('El formulario no es valido');
-    } 
+    this.submitted = true;
 
-    console.log(this.cocheForm.value);
+    if (this.cocheForm.valid) {
+      // hago lo que tenga que hacer
+      console.log(this.cocheForm.value);
+    }   
+  }
+
+  limpiar(): void {
+    this.submitted = false;
+    this.cocheForm.reset();
   }
 
   private loadCoche(value: Coche): void {
