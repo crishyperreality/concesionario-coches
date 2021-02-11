@@ -1,29 +1,56 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import {
+  Directive, ElementRef, EventEmitter, Input,
+  OnChanges, OnInit, Output, Renderer2, SimpleChanges
+} from '@angular/core';
 
 @Directive({
   selector: '[appCocheEstado]'
 })
-export class CocheEstadoDirective implements OnInit {
+export class CocheEstadoDirective implements OnInit, OnChanges {
 
   @Input() appCocheEstado = false;
   @Output() clicked = new EventEmitter<string>();
+
+  icon: HTMLElement; // undefined
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
   }
 
   ngOnInit(): void {
-    // <i class="fa fa-lock"></i> 
-    const icon = this.renderer.createElement('i'); // <i></i>
-    this.renderer.addClass(icon, 'fa');
-    this.renderer.addClass(icon, this.dameClaseFA());
-    this.renderer.setStyle(icon, 'color', this.dameColor());
+    // console.log('2')
+    // // <i class="fa fa-lock"></i> 
+    // this.icon = this.renderer.createElement('i'); // <i></i>
+    // this.renderer.addClass(this.icon, 'fa');
+    // this.renderer.addClass(this.icon, this.dameClaseFA());
+    // this.renderer.setStyle(this.icon, 'color', this.dameColor());
 
 
-    this.renderer.listen(icon, 'click', (e) => {      
-       this.clicked.emit('Hola que tal');
-    });
+    // this.renderer.listen(this.icon, 'click', (e) => {
+    //   this.clicked.emit('Hola que tal');
+    // });
 
-    this.renderer.appendChild(this.el.nativeElement, icon); // <td><i></i></td>
+    // this.renderer.appendChild(this.el.nativeElement, this.icon); // <td><i></i></td>
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (changes.appCocheEstado) {      
+      if (this.icon) {
+        this.renderer.removeChild(this.el.nativeElement, this.icon);
+      }
+
+      this.icon = this.renderer.createElement('i'); // <i></i>
+      this.renderer.addClass(this.icon, 'fa');
+      this.renderer.addClass(this.icon, this.dameClaseFA());
+      this.renderer.setStyle(this.icon, 'color', this.dameColor());
+
+
+      this.renderer.listen(this.icon, 'click', (e) => {
+        this.clicked.emit('Hola que tal');
+      });
+
+      this.renderer.appendChild(this.el.nativeElement, this.icon);
+    }
   }
 
   private dameClaseFA(): string {
