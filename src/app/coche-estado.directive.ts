@@ -8,7 +8,7 @@ import {
 })
 export class CocheEstadoDirective implements OnChanges {
 
-  @Input() appCocheEstado = false;
+  @Input() appCocheEstado: boolean;
   @Output() clicked = new EventEmitter<string>();
 
   icon: HTMLElement; // undefined
@@ -25,7 +25,10 @@ export class CocheEstadoDirective implements OnChanges {
 
       this.renderer.removeClass(this.icon, 'fa-lock');
       this.renderer.removeClass(this.icon, 'fa-lock-open');
-      this.renderer.addClass(this.icon, this.dameClaseCamdado());
+      const css = this.dameClaseCandado();
+      if (css) {
+        this.renderer.addClass(this.icon, css);
+      }
       this.renderer.setStyle(this.icon, 'color', this.dameColorCandado());
     }
   }
@@ -39,8 +42,12 @@ export class CocheEstadoDirective implements OnChanges {
     this.renderer.appendChild(this.el.nativeElement, this.icon);
   }
 
-  private dameClaseCamdado(): string {
-    return this.appCocheEstado ? 'fa-lock' : 'fa-lock-open';
+  private dameClaseCandado(): string {
+    if (this.appCocheEstado !== null && this.appCocheEstado !== undefined) {
+      return this.appCocheEstado ? 'fa-lock' : 'fa-lock-open';
+    }
+
+    return '';
   }
 
   private dameColorCandado(): string {

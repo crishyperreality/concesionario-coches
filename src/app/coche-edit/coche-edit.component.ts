@@ -34,13 +34,13 @@ export class CocheEditComponent implements OnInit, OnChanges {
 
     this.cocheForm = fb.group({
       marca: ['', Validators.required],
-      modelo: ['', Validators.required],
+      modelo: ['', [Validators.required, Validators.minLength(5)]],
       puertas: [''],
       tipoDeCoche: [''],
       potencia: [''],
-      oferta: [''],
-      visible: [''],
-      vendido: [''],
+      oferta: [null],
+      visible: [null],
+      vendido: [null],
       fecha: [''],
       precio: ['', [Validators.required, Validators.min(10000)]],
       color: [''],

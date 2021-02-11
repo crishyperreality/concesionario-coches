@@ -22,18 +22,30 @@
             <div class="field-element">
                 <label>Potencia</label>
                 <input type="number" formControlName="potencia">
-            </div>        
+            </div>
             <div class="field-element">
                 <label>En oferta</label>
-                <input type="checkbox" formControlName="oferta">
+                <select formControlName="oferta">
+                    <option value=""></option>
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
             </div>
             <div class="field-element">
                 <label>Es Visible</label>
-                <input type="checkbox" formControlName="visible">
+                <select formControlName="visible">
+                    <option value=""></option>
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
             </div>
             <div class="field-element">
-                <label>Esta Vendido</label>
-                <input type="checkbox" formControlName="vendido">
+                <label [appCocheEstado]="cocheForm.controls.vendido.value">Esta Vendido</label>
+                <select formControlName="vendido">
+                    <option value=""></option>
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
             </div>
             <div class="field-element">
                 <label>Fecha de Alta</label>
@@ -48,6 +60,6 @@
                 <input type="color" formControlName="color">
             </div>
         </div>
-        <button class="btn" type="submit" [disabled]="cocheForm.invalid" >Grabar</button>
+        <button class="btn" type="submit" [disabled]="cocheForm.invalid">Grabar</button>
     </form>
 </div>

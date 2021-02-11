@@ -41,6 +41,22 @@
             border-bottom: 2px solid darkblue;
         }
     }
+
+    select {
+        border: none;
+        height: 32px;
+        border-bottom: 1px solid gray;
+        font-size: 1.1rem;
+        background-color: transparent;
+        &:focus {
+            outline: none;
+            border-bottom: 2px solid darkblue;
+        }
+
+        option{
+            padding: 5px;
+        }
+    }
 }
 .row {
     display: flex;
@@ -61,7 +77,7 @@
         font-weight: bold;
     }
 
-    &:disabled{
+    &:disabled {
         background-color: gray;
     }
 }
