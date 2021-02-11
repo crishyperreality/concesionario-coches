@@ -1,4 +1,4 @@
 <app-coches-list [coches]="coches" (cocheSeleccionado)="cocheSeleccion($event)"></app-coches-list>
 <!-- <app-coche-detail [coche]="cocheSeleccionado" ></app-coche-detail> -->
 
-<app-coche-edit></app-coche-edit>
+<app-coche-edit [coche]="cocheSeleccionado" ></app-coche-edit>

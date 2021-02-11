@@ -28,14 +28,14 @@ export class HighlightDirective implements OnInit {
     // this.renderer.setStyle(this.el.nativeElement, 'background-color', this.appHighlight || this.appHighlightDefault); 
 
     this.renderer.setStyle(this.el.nativeElement, 'color', this.color);
-    this.renderer.setStyle(this.el.nativeElement, 'font-size', this.size);
+    // this.renderer.setStyle(this.el.nativeElement, 'font-size', this.size);
   }
 
   @HostListener('mouseleave')
   elRatonSale(): void {
     this.renderer.setStyle(this.el.nativeElement, 'background-color', null);
     this.renderer.setStyle(this.el.nativeElement, 'color', 'black');
-    this.renderer.setStyle(this.el.nativeElement, 'font-size', this.fontSize);
+    // this.renderer.setStyle(this.el.nativeElement, 'font-size', this.fontSize);
   }
 
   ngOnInit(): void {
