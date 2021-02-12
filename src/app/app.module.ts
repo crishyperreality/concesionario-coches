@@ -11,6 +11,7 @@ import { CocheEstadoDirective } from './coche-estado.directive';
 import { CocheEditComponent } from './coche-edit/coche-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { CochesService } from './coches.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CochesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

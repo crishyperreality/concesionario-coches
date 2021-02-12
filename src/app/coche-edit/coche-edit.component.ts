@@ -21,7 +21,7 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[]  = []
 
-  constructor(private fb: FormBuilder) {
+  constructor(fb: FormBuilder) {
     this.cocheForm = fb.group({
       marca: ['', [Validators.required, this.marcaNoValida]],
       modelo: ['', [Validators.required, Validators.minLength(5)]],
@@ -37,7 +37,7 @@ export class CocheEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.subscriptions.push(this.cocheForm.controls.marca.valueChanges.subscribe((x: string) => {
       if (x.toLowerCase().includes('toyota')) {        
         this.cocheForm.controls.modelo.setValue('Corolla');
