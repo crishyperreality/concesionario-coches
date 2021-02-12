@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Coche } from '../model/coche';
@@ -19,10 +19,13 @@ export class CocheEditComponent implements OnInit, OnDestroy {
     }
   };
 
-  subscriptions: Subscription[]  = []
+  @Output() guardado = new EventEmitter<Coche>();
+
+  subscriptions: Subscription[] = []
 
   constructor(fb: FormBuilder) {
     this.cocheForm = fb.group({
+      id: [''],
       marca: ['', [Validators.required, this.marcaNoValida]],
       modelo: ['', [Validators.required, Validators.minLength(5)]],
       puertas: [''],
@@ -37,9 +40,9 @@ export class CocheEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.subscriptions.push(this.cocheForm.controls.marca.valueChanges.subscribe((x: string) => {
-      if (x.toLowerCase().includes('toyota')) {        
+      if (x.toLowerCase().includes('toyota')) {
         this.cocheForm.controls.modelo.setValue('Corolla');
       }
     }));
@@ -54,6 +57,8 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
     if (this.cocheForm.valid) {
       // hago lo que tenga que hacer
+      const c = new Coche(this.cocheForm.value);
+      this.guardado.emit(new Coche(c));
       console.log(` Grabando datos de un coche ${this.cocheForm.value}`);
     }
   }

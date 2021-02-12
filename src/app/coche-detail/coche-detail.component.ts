@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Coche } from '../model/coche';
 
 @Component({
@@ -6,13 +7,24 @@ import { Coche } from '../model/coche';
   templateUrl: './coche-detail.component.html',
   styleUrls: ['./coche-detail.component.scss']
 })
-export class CocheDetailComponent implements OnInit {
+export class CocheDetailComponent implements OnChanges {
 
-  @Input() coche: Coche;
+  _coche: Coche;
+  @Input() set coche(value: Coche) {
+    this._coche = { ...value };
+  }
+  get coche(): Coche {
+    return this._coche;
+  }
 
   constructor() { }
-
-  ngOnInit(): void {
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.coche) {
+      setInterval(() => {
+        this.coche.potencia++;
+      }, 1000)
+    }
   }
 
 }

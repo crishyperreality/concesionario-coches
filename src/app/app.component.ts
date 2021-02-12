@@ -22,11 +22,17 @@ export class AppComponent implements OnInit {
 
 
   cocheSeleccion(coche: Coche): void {
+    console.log(coche);
     this.cocheSeleccionado = coche;
   }
 
   mostrarClick(event: Event): void {
     console.log(event);
+  }
+
+  guardarCoche(coche: Coche): void {
+    console.log(new Coche());
+    console.log(coche);
   }
 
 }
