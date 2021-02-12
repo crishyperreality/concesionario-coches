@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -42,8 +43,10 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(this.cocheForm.controls.marca.valueChanges.subscribe((x: string) => {
-      if (x.toLowerCase().includes('toyota')) {
-        this.cocheForm.controls.modelo.setValue('Corolla');
+      if (x) {
+        if (x.toLowerCase().includes('toyota')) {
+          this.cocheForm.controls.modelo.setValue('Corolla');
+        }
       }
     }));
   }
@@ -57,7 +60,9 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
     if (this.cocheForm.valid) {
       // hago lo que tenga que hacer
+      console.log(this.cocheForm.value);
       const c = new Coche(this.cocheForm.value);
+      console.log(c);
       this.guardado.emit(new Coche(c));
       console.log(` Grabando datos de un coche ${this.cocheForm.value}`);
     }
@@ -72,7 +77,7 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
     const marcasNoValidas = ['bmw', 'opel'];
 
-    if (marcasNoValidas.includes(control.value.toLowerCase())) {
+    if (marcasNoValidas.includes(control.value?.toLowerCase())) {
       return {
         marcaNoValida: true
       };
@@ -81,6 +86,7 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
   private loadCoche(value: Coche): void {
     this.cocheForm.patchValue(value);
+    this.cocheForm.controls.fecha.setValue(formatDate(value.fecha, 'yyyy-MM-dd', 'es'));
     // this.cocheForm.controls.fecha.setValue('1-2-2020');
     // this.cocheForm.controls.marca.setValue(value.marca);
     // this.cocheForm.controls.modelo.setValue(value.modelo);

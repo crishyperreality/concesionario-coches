@@ -16,7 +16,7 @@
                 <td [appHighlight]="item.color" [color]="'purple'" [size]="'40px'"  >{{item.modelo | uppercase}}</td>
                 <td>{{item.potencia | potencia}}</td>
                 <td>{{item.precio | currency }}</td>
-                <td>{{item.fecha | date : 'longDate' | uppercase | slice :0:4}}</td>
+                <td>{{item.fecha | date : 'longDate' | uppercase }}</td>
                 <td [appCocheEstado]="item.vendido" (clicked)="seleccionClick(item)">                                
                 </td>
             </tr>

@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
   coches: Coche[] = [];
   cocheSeleccionado: Coche;
 
-  constructor(private c: CochesService) {
+  constructor(private cochesService: CochesService) {
   }
 
   ngOnInit(): void {
-    this.coches = this.c.getCoches();
+    this.coches = this.cochesService.getCoches();
   }
 
 
@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
   }
 
   guardarCoche(coche: Coche): void {
-    console.log(new Coche());
-    console.log(coche);
+    this.cochesService.guardarCoche(coche);
+    this.coches = this.cochesService.getCoches();     
   }
 
 }

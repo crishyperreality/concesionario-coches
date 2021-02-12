@@ -18,7 +18,7 @@ export class CocheDetailComponent implements OnChanges {
   }
 
   constructor() { }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.coche) {
       setInterval(() => {

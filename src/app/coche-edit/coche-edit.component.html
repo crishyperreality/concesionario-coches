@@ -51,7 +51,8 @@
             </div>
             <div class="field-element">
                 <label>Fecha de Alta</label>
-                <input type="date" formControlName="fecha">
+                <!-- <input type="date" formControlName="fecha" value="{{cocheForm.controls.fecha.value | date: 'yyyy-MM-dd'}}"   > -->
+                <input type="date" formControlName="fecha" >
             </div>
             <div class="field-element" [ngClass]="{'error': cocheForm.controls.modelo.invalid && submitted }">
                 <label>Precio <span>*</span></label>
