@@ -9,7 +9,8 @@ import { HighlightDirective } from './highlight.directive';
 import { HighlightAvanzadoDirective } from './highlight-avanzado.directive';
 import { CocheEstadoDirective } from './coche-estado.directive';
 import { CocheEditComponent } from './coche-edit/coche-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     HighlightDirective,
     HighlightAvanzadoDirective,
     CocheEstadoDirective,
-    CocheEditComponent
+    CocheEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],
