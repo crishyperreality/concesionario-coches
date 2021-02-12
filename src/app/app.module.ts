@@ -1,17 +1,22 @@
-import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsp from '@angular/common/locales/es';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { CochesListComponent } from './coches-list/coches-list.component';
 import { CocheDetailComponent } from './coche-detail/coche-detail.component';
-import { CochesTableComponent } from './coches-list/coches-table/coches-table.component';
-import { CochesCardListComponent } from './coches-list/coches-card-list/coches-card-list.component';
-import { HighlightDirective } from './highlight.directive';
-import { HighlightAvanzadoDirective } from './highlight-avanzado.directive';
-import { CocheEstadoDirective } from './coche-estado.directive';
 import { CocheEditComponent } from './coche-edit/coche-edit.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+import { CocheEstadoDirective } from './coche-estado.directive';
+import { CochesCardListComponent } from './coches-list/coches-card-list/coches-card-list.component';
+import { CochesListComponent } from './coches-list/coches-list.component';
+import { CochesTableComponent } from './coches-list/coches-table/coches-table.component';
 import { CochesService } from './coches.service';
+import { HighlightAvanzadoDirective } from './highlight-avanzado.directive';
+import { HighlightDirective } from './highlight.directive';
+import { LoginComponent } from './login/login.component';
+import { PotenciaPipe } from './potencia.pipe';
+
+registerLocaleData(localeEsp);
 
 @NgModule({
   declarations: [
@@ -24,14 +29,18 @@ import { CochesService } from './coches.service';
     HighlightAvanzadoDirective,
     CocheEstadoDirective,
     CocheEditComponent,
-    LoginComponent
+    LoginComponent,
+    PotenciaPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [CochesService],
+  providers: [CochesService,
+    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

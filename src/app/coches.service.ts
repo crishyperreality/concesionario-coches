@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Coche } from './model/coche';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CochesService {
 
   constructor() { }
@@ -18,7 +20,7 @@ export class CochesService {
       oferta: false,
       visible: false,
       vendido: false,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2020, 1, 11),
       precio: 35000,
       color: 'red'
     },
@@ -32,7 +34,7 @@ export class CochesService {
       oferta: false,
       visible: true,
       vendido: false,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2020, 5, 1),
       precio: 15000,
       color: 'green'
     }, {
@@ -45,7 +47,7 @@ export class CochesService {
       oferta: true,
       visible: true,
       vendido: false,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2020, 2, 1),
       precio: 50000,
     }, {
       id: '6',
@@ -57,7 +59,7 @@ export class CochesService {
       oferta: false,
       visible: false,
       vendido: false,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2020, 1, 12),
       precio: 50000,
       color: 'blue'
 
@@ -71,7 +73,7 @@ export class CochesService {
       oferta: false,
       visible: true,
       vendido: true,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2021, 1,22),
       precio: 50000,
       color: 'pink'
 
@@ -85,7 +87,7 @@ export class CochesService {
       oferta: true,
       visible: false,
       vendido: false,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2020, 7, 1),
       precio: 15000,
       color: '#CECECE'
     }, {
@@ -98,7 +100,7 @@ export class CochesService {
       oferta: false,
       visible: false,
       vendido: false,
-      fecha: new Date(2020, 1, 1),
+      fecha: new Date(2020, 2, 1),
       precio: 22000,
       color: 'orange'
     }];

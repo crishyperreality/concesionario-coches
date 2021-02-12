@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
   coches: Coche[] = [];
   cocheSeleccionado: Coche;
 
-  constructor(private cochesService: CochesService) {
+  constructor(private c: CochesService) {
   }
 
   ngOnInit(): void {
-    this.coches = this.cochesService.getCoches();
+    this.coches = this.c.getCoches();
   }
 
 

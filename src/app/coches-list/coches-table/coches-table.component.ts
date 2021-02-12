@@ -11,6 +11,8 @@ export class CochesTableComponent implements OnInit {
   @Input() coches: Coche[];
   @Output() cocheSeleccionado = new EventEmitter<Coche>();
 
+  cont = 0;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +20,12 @@ export class CochesTableComponent implements OnInit {
 
   seleccionClick(event: Coche): void {
     event.vendido = !event.vendido;
-   //  alert(`Se ha seleccionado el coche ${event.modelo}`);
+    //  alert(`Se ha seleccionado el coche ${event.modelo}`);
+  }
+
+  getPotencia(potencia: number): string {
+    // this.cont++;
+    // console.log(this.cont)
+    return potencia + ' cv';
   }
 }
