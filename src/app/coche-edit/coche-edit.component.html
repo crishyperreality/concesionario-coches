@@ -6,6 +6,7 @@
             <div class="field-element" [ngClass]="{'error': cocheForm.controls.marca.invalid && submitted }" >
                 <label>Marca <span>*</span></label>
                 <input type="text" formControlName="marca">
+                <div class="error" *ngIf="cocheForm.controls.marca.hasError('marcaNoValida')">No vendemos {{cocheForm.controls.marca.value}}</div>
             </div>
             <div class="field-element" [ngClass]="{'error': cocheForm.controls.modelo.invalid && submitted }">
                 <label>Modelo <span>*</span></label>

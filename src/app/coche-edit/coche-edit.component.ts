@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Coche } from '../model/coche';
 
 @Component({
@@ -7,7 +8,7 @@ import { Coche } from '../model/coche';
   templateUrl: './coche-edit.component.html',
   styleUrls: ['./coche-edit.component.scss']
 })
-export class CocheEditComponent implements OnInit, OnChanges {
+export class CocheEditComponent implements OnInit, OnDestroy {
 
   cocheForm: FormGroup;
   submitted = false;
@@ -18,23 +19,11 @@ export class CocheEditComponent implements OnInit, OnChanges {
     }
   };
 
-  constructor(private fb: FormBuilder) {
-    // this.cocheForm = new FormGroup({
-    //   marca: new FormControl(''),
-    //   modelo: new FormControl(''),
-    //   puertas: new FormControl(''),
-    //   tipoDeCoche: new FormControl(''),
-    //   potencia: new FormControl(''),
-    //   oferta: new FormControl(''),
-    //   visible: new FormControl(''),
-    //   vendido: new FormControl(''),
-    //   fecha: new FormControl(''),
-    //   precio: new FormControl(''),
-    //   color: new FormControl('')
-    // });
+  subscriptions: Subscription[]  = []
 
+  constructor(private fb: FormBuilder) {
     this.cocheForm = fb.group({
-      marca: ['', Validators.required],
+      marca: ['', [Validators.required, this.marcaNoValida]],
       modelo: ['', [Validators.required, Validators.minLength(5)]],
       puertas: [''],
       tipoDeCoche: [''],
@@ -48,14 +37,16 @@ export class CocheEditComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // if (changes.coche) {
-    //   this.loadCoche(changes.coche.currentValue);
-    // }
+  ngOnInit(): void {
+    this.subscriptions.push(this.cocheForm.controls.marca.valueChanges.subscribe((x: string) => {
+      if (x.toLowerCase().includes('toyota')) {        
+        this.cocheForm.controls.modelo.setValue('Corolla');
+      }
+    }));
   }
 
-  ngOnInit(): void {
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   grabar(): void {
@@ -63,8 +54,8 @@ export class CocheEditComponent implements OnInit, OnChanges {
 
     if (this.cocheForm.valid) {
       // hago lo que tenga que hacer
-      console.log(this.cocheForm.value);
-    }   
+      console.log(` Grabando datos de un coche ${this.cocheForm.value}`);
+    }
   }
 
   limpiar(): void {
@@ -72,8 +63,18 @@ export class CocheEditComponent implements OnInit, OnChanges {
     this.cocheForm.reset();
   }
 
+  marcaNoValida(control: FormControl): { [s: string]: boolean } {
+
+    const marcasNoValidas = ['bmw', 'opel'];
+
+    if (marcasNoValidas.includes(control.value.toLowerCase())) {
+      return {
+        marcaNoValida: true
+      };
+    }
+  }
+
   private loadCoche(value: Coche): void {
-    console.log(value);
     this.cocheForm.patchValue(value);
     // this.cocheForm.controls.fecha.setValue('1-2-2020');
     // this.cocheForm.controls.marca.setValue(value.marca);
