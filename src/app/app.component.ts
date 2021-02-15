@@ -17,7 +17,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.coches = this.cochesService.getCoches();
+    this.cochesService.getCoches().subscribe(coches => {
+      if (coches){
+        this.coches = coches;
+      }
+    })
   }
 
 
@@ -32,7 +36,11 @@ export class AppComponent implements OnInit {
 
   guardarCoche(coche: Coche): void {
     this.cochesService.guardarCoche(coche);
-    this.coches = this.cochesService.getCoches();     
+    this.cochesService.getCoches().subscribe(coches => {
+      if (coches){
+        this.coches = coches;
+      }
+    }) 
   }
 
 }

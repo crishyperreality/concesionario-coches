@@ -2,6 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEsp from '@angular/common/locales/es';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CocheDetailComponent } from './coche-detail/coche-detail.component';
@@ -35,6 +36,7 @@ registerLocaleData(localeEsp);
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [CochesService,

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Coche } from './model/coche';
 
 @Injectable({
@@ -102,15 +104,17 @@ export class CochesService {
   }];
 
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getCoches(): Coche[] {    
-    return this.coches;
+  getCoches(): Observable<Coche[]> {
+
+    return this.http.get<Coche[]>('https://api-coches.herokuapp.com/cars/');
+
   }
 
   guardarCoche(coche: Coche): void {
     const idx = this.coches.findIndex(c => c.id === coche.id);
-    if (idx >= 0){
+    if (idx >= 0) {
       this.coches[idx] = coche;
     }
   }
