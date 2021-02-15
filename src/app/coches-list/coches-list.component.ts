@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Coche } from '../model/coche';
+import { CocheListItem } from '../model/coche-list-item';
 
 @Component({
   selector: 'app-coches-list',
@@ -9,17 +10,15 @@ import { Coche } from '../model/coche';
 export class CochesListComponent implements OnInit {
 
 
-  cochesFiltrados: Coche[] = [];
+  cochesFiltrados: CocheListItem[] = [];
+  private _coches: CocheListItem[] = [];
 
-
-  private _coches: Coche[] = [];
-
-  @Input() set coches(value: Coche[]) {    
+  @Input() set coches(value: CocheListItem[]) {    
     this._coches = value;
     this.filtrarCoches();
   }
 
-  get coches(): Coche[] {
+  get coches(): CocheListItem[] {
     return this._coches;
   }
 

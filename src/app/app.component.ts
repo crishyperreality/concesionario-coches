@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CochesService } from './coches.service';
 import { Coche } from './model/coche';
+import { CocheListItem } from './model/coche-list-item';
 
 @Component({
   selector: 'app-root',
@@ -10,24 +11,23 @@ import { Coche } from './model/coche';
 export class AppComponent implements OnInit {
   title = 'concesionario';
 
-  coches: Coche[] = [];
+  coches: CocheListItem[] = [];
   cocheSeleccionado: Coche;
 
   constructor(private cochesService: CochesService) {
   }
 
   ngOnInit(): void {
-    this.cochesService.getCoches().subscribe(coches => {
-      if (coches){
-        this.coches = coches;
-      }
-    })
+    this.loadCoches();
   }
 
 
-  cocheSeleccion(coche: Coche): void {
-    console.log(coche);
-    this.cocheSeleccionado = coche;
+  cocheSeleccion(coche: CocheListItem): void {
+    this.cochesService.getCoche(coche.id).subscribe(c => {
+      if (c) {
+        this.cocheSeleccionado = c;
+      }
+    })
   }
 
   mostrarClick(event: Event): void {
@@ -35,12 +35,21 @@ export class AppComponent implements OnInit {
   }
 
   guardarCoche(coche: Coche): void {
-    this.cochesService.guardarCoche(coche);
+    this.cochesService.guardarCoche(coche).subscribe(c => {
+      if (c) {
+        this.cocheSeleccionado = c;
+      }
+      this.loadCoches();
+    });
+  }
+
+  private loadCoches(): void {
     this.cochesService.getCoches().subscribe(coches => {
-      if (coches){
+      if (coches) {
         this.coches = coches;
       }
-    }) 
+    });
   }
+
 
 }

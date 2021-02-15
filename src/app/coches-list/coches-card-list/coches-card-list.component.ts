@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Coche } from 'src/app/model/coche';
+import { CocheListItem } from 'src/app/model/coche-list-item';
 
 
 @Component({
@@ -9,15 +9,15 @@ import { Coche } from 'src/app/model/coche';
 })
 export class CochesCardListComponent implements OnInit {
 
-  @Input() coches: Coche[];
-  @Output() cocheSeleccionado = new EventEmitter<Coche>();
+  @Input() coches: CocheListItem[];
+  @Output() cocheSeleccionado = new EventEmitter<CocheListItem>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  mostarCocheClick(coche: Coche): void {    
+  mostarCocheClick(coche: CocheListItem): void {
     this.cocheSeleccionado.emit(coche);
   }
 

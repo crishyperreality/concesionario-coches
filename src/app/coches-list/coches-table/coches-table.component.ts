@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Coche } from 'src/app/model/coche';
+import { CocheListItem } from 'src/app/model/coche-list-item';
 
 @Component({
   selector: 'app-coches-table',
@@ -8,7 +9,7 @@ import { Coche } from 'src/app/model/coche';
 })
 export class CochesTableComponent implements OnInit {
 
-  @Input() coches: Coche[];
+  @Input() coches: CocheListItem[];
   @Output() cocheSeleccionado = new EventEmitter<Coche>();
 
   cont = 0;
@@ -18,7 +19,7 @@ export class CochesTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  seleccionClick(event: Coche): void {
+  seleccionClick(event: CocheListItem): void {
     event.vendido = !event.vendido;
     //  alert(`Se ha seleccionado el coche ${event.modelo}`);
   }

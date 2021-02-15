@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Coche } from './model/coche';
+import { map } from 'rxjs/operators';
+import { Car } from './model/car';
+import { Coche, CocheApi } from './model/coche';
+import { CocheListItem } from './model/coche-list-item';
 
 @Injectable({
   providedIn: 'root'
@@ -106,16 +109,34 @@ export class CochesService {
 
   constructor(private http: HttpClient) { }
 
-  getCoches(): Observable<Coche[]> {
-
-    return this.http.get<Coche[]>('https://api-coches.herokuapp.com/cars/');
-
+  getCoches(): Observable<CocheListItem[]> {
+    return this.http.get<Car[]>('https://api-coches.herokuapp.com/cars/').pipe(map(x => {
+      return x.map(car => {
+        return CocheListItem.parseFromCar(car);
+      });
+    }));
   }
 
-  guardarCoche(coche: Coche): void {
-    const idx = this.coches.findIndex(c => c.id === coche.id);
-    if (idx >= 0) {
-      this.coches[idx] = coche;
+  getCoche(id: string): Observable<Coche> {
+    return this.http.get<Car>(`https://api-coches.herokuapp.com/cars/${id}`)
+      .pipe(map(car => {
+        return Coche.parseFromCar(car);
+      }));
+  }
+
+  guardarCoche(coche: Coche): Observable<Coche> {
+
+    if (coche.id) {
+      return this.http.put<Car>(`https://api-coches.herokuapp.com/cars/${coche.id}`, Car.parseFromCoche(coche))
+        .pipe(map(car => {
+          return Coche.parseFromCar(car);
+        }));
+    } else {
+      return this.http.post<Car>('https://api-coches.herokuapp.com/cars/',  Car.parseFromCoche(coche))
+        .pipe(map(car => {
+          return Coche.parseFromCar(car);
+        }));
     }
+
   }
 }
