@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadCoches();
   }
 
 
@@ -39,26 +38,10 @@ export class AppComponent implements OnInit {
       if (cocheGuardado) {
         this.cocheSeleccionado = cocheGuardado;
       }
-      this.loadCoches();
+      // this.loadCoches();
     });
   }
 
-  borrarCoche(coche: CocheListItem): void {
-    this.cochesService.borrarCoche(coche.id).subscribe(cocheBorrado => {
-      if (cocheBorrado){
-        alert('Coche Borrado');
-      }    
-      this.loadCoches();
-    });
-  }
-
-  private loadCoches(): void {
-    this.cochesService.getCoches().subscribe(coches => {
-      if (coches) {
-        this.coches = coches;
-      }
-    });
-  }
-
+ 
 
 }

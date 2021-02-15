@@ -1,7 +1,9 @@
 import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CochesService } from '../coches.service';
 import { Coche } from '../model/coche';
 
 @Component({
@@ -20,11 +22,11 @@ export class CocheEditComponent implements OnInit, OnDestroy {
     }
   };
 
-  @Output() guardado = new EventEmitter<Coche>();
-
   subscriptions: Subscription[] = []
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private cochesService: CochesService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.cocheForm = fb.group({
       id: [''],
       marca: ['', [Validators.required, this.marcaNoValida]],
@@ -42,6 +44,18 @@ export class CocheEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      if (params.id) {
+        this.cochesService.getCoche(params.id).subscribe(coche => {
+          if (coche) {
+            this.loadCoche(coche);
+          }
+        });
+      }
+    })
+
+
     this.subscriptions.push(this.cocheForm.controls.marca.valueChanges.subscribe((x: string) => {
       if (x) {
         if (x.toLowerCase().includes('toyota')) {
@@ -60,11 +74,14 @@ export class CocheEditComponent implements OnInit, OnDestroy {
 
     if (this.cocheForm.valid) {
       // hago lo que tenga que hacer
-      console.log(this.cocheForm.value);
       const c = new Coche(this.cocheForm.value);
-      console.log(c);
-      this.guardado.emit(new Coche(c));
-      console.log(` Grabando datos de un coche ${this.cocheForm.value}`);
+
+      this.cochesService.guardarCoche(c).subscribe(cocheGuardado => {
+        if (cocheGuardado) {
+          alert('Coche guardado');
+          this.router.navigate(['coches']);
+        }
+      });    
     }
   }
 

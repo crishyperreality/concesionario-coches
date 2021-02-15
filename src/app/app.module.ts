@@ -16,6 +16,7 @@ import { HighlightAvanzadoDirective } from './highlight-avanzado.directive';
 import { HighlightDirective } from './highlight.directive';
 import { LoginComponent } from './login/login.component';
 import { PotenciaPipe } from './potencia.pipe';
+import { AppRoutingModule } from './app-routing.module';
 
 registerLocaleData(localeEsp);
 
@@ -37,7 +38,8 @@ registerLocaleData(localeEsp);
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [CochesService,
     { provide: LOCALE_ID, useValue: 'es' },

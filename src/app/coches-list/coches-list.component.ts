@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { CochesService } from '../coches.service';
 import { Coche } from '../model/coche';
 import { CocheListItem } from '../model/coche-list-item';
 
@@ -13,7 +15,7 @@ export class CochesListComponent implements OnInit {
   cochesFiltrados: CocheListItem[] = [];
   private _coches: CocheListItem[] = [];
 
-  @Input() set coches(value: CocheListItem[]) {    
+  @Input() set coches(value: CocheListItem[]) {
     this._coches = value;
     this.filtrarCoches();
   }
@@ -23,26 +25,21 @@ export class CochesListComponent implements OnInit {
   }
 
   @Output() cocheSeleccionado = new EventEmitter<CocheListItem>();
-  @Output() borrar = new EventEmitter<CocheListItem>();
+ 
 
   verTabla = true;
   soloVendidos = false;
   soloVendidosLabel = 'Mostrar solo vendidos';
 
-  constructor() { }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes.coches) {
-  //     console.log('set coches ngOnChanges');
-  //     this.filtrarCoches();
-  //   }
-  // }
+  constructor(private cochesService: CochesService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loadCoches();
   }
 
   mostrarCocheClick(coche: Coche): void {
-    this.cocheSeleccionado.emit(coche);
+    this.router.navigate(['coches/detalle', coche.id ]);
+    // this.cocheSeleccionado.emit(coche);
   }
 
   mostrarTarjetas(): void {
@@ -58,6 +55,15 @@ export class CochesListComponent implements OnInit {
     this.filtrarCoches();
   }
 
+  borrarCoche(coche: CocheListItem): void {
+    this.cochesService.borrarCoche(coche.id).subscribe(cocheBorrado => {
+      if (cocheBorrado){
+        alert('Coche Borrado');
+      }    
+      this.loadCoches();
+    });
+  }
+
   private filtrarCoches(): void {
     if (this.soloVendidos) {
       this.cochesFiltrados = this.coches.filter(c => c.vendido);
@@ -69,5 +75,13 @@ export class CochesListComponent implements OnInit {
 
     // this.cochesFiltrados = this.soloVendidos ? this.coches.filter(c => c.vendido) : this.coches;
     // this.soloVendidosLabel = this.soloVendidos ? 'Mostrar todos' : 'Mostrar solo vendidos';
+  }
+
+  private loadCoches(): void {
+    this.cochesService.getCoches().subscribe(coches => {
+      if (coches) {
+        this.coches = coches;
+      }
+    });
   }
 }

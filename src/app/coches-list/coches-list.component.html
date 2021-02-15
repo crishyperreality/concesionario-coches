@@ -6,7 +6,7 @@
         <button *ngIf="verTabla" (click)="mostrarTarjetas()">Mostrar tarjetas</button>
         <button *ngIf="!verTabla" (click)="mostrarTabla()">Mostrar tabla</button>
     </div>
-    <app-coches-table *ngIf="verTabla" [coches]="cochesFiltrados" (borrar)="borrar.emit($event)" (cocheSeleccionado)="cocheSeleccionado.emit($event)"></app-coches-table>
+    <app-coches-table *ngIf="verTabla" [coches]="cochesFiltrados" (borrar)="borrarCoche($event)" (cocheSeleccionado)="mostrarCocheClick($event)"></app-coches-table>
     <app-coches-card-list *ngIf="!verTabla" [coches]="cochesFiltrados"  (cocheSeleccionado)="mostrarCocheClick($event)">
     </app-coches-card-list>
 </div>
