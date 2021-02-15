@@ -10,7 +10,8 @@ import { CocheListItem } from 'src/app/model/coche-list-item';
 export class CochesTableComponent implements OnInit {
 
   @Input() coches: CocheListItem[];
-  @Output() cocheSeleccionado = new EventEmitter<Coche>();
+  @Output() cocheSeleccionado = new EventEmitter<CocheListItem>();
+  @Output() borrar = new EventEmitter<CocheListItem>();
 
   cont = 0;
 
@@ -28,5 +29,12 @@ export class CochesTableComponent implements OnInit {
     // this.cont++;
     // console.log(this.cont)
     return potencia + ' cv';
+  }
+
+  borrarClick(event: Event, coche: CocheListItem): void {
+    event.stopPropagation();
+    if (window.confirm('¿ Seguro que quieres borrar el coche ?')){
+      this.borrar.emit(coche);
+    }
   }
 }

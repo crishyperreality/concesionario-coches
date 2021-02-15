@@ -12,12 +12,13 @@
         <ng-container *ngFor="let item of coches">
             <tr (click)="cocheSeleccionado.emit(item)" [ngClass]="{vendido: item.vendido}">
                 <td>{{item.id}}</td>
-                <td>{{item.marca | uppercase}}</td>
+                <td [appCocheEstado]="item.vendido">{{item.marca | uppercase}}</td>
                 <td [appHighlight]="item.color" [color]="'purple'" [size]="'40px'"  >{{item.modelo | uppercase}}</td>
                 <td>{{item.potencia | potencia}}</td>
                 <td>{{item.precio | currency }}</td>
                 <td>{{item.fecha | date : 'longDate' | uppercase }}</td>
-                <td [appCocheEstado]="item.vendido" (clicked)="seleccionClick(item)">                                
+                <td>     
+                    <i title="Eliminar Coche" class="fa fa-trash" (click)="borrarClick($event, item)"></i>                           
                 </td>
             </tr>
         </ng-container>

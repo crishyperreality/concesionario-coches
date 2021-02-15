@@ -35,10 +35,19 @@ export class AppComponent implements OnInit {
   }
 
   guardarCoche(coche: Coche): void {
-    this.cochesService.guardarCoche(coche).subscribe(c => {
-      if (c) {
-        this.cocheSeleccionado = c;
+    this.cochesService.guardarCoche(coche).subscribe(cocheGuardado => {
+      if (cocheGuardado) {
+        this.cocheSeleccionado = cocheGuardado;
       }
+      this.loadCoches();
+    });
+  }
+
+  borrarCoche(coche: CocheListItem): void {
+    this.cochesService.borrarCoche(coche.id).subscribe(cocheBorrado => {
+      if (cocheBorrado){
+        alert('Coche Borrado');
+      }    
       this.loadCoches();
     });
   }

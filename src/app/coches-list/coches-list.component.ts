@@ -22,7 +22,8 @@ export class CochesListComponent implements OnInit {
     return this._coches;
   }
 
-  @Output() cocheSeleccionado = new EventEmitter<Coche>();
+  @Output() cocheSeleccionado = new EventEmitter<CocheListItem>();
+  @Output() borrar = new EventEmitter<CocheListItem>();
 
   verTabla = true;
   soloVendidos = false;

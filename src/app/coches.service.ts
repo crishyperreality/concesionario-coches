@@ -110,7 +110,8 @@ export class CochesService {
   constructor(private http: HttpClient) { }
 
   getCoches(): Observable<CocheListItem[]> {
-    return this.http.get<Car[]>('https://api-coches.herokuapp.com/cars/').pipe(map(x => {
+    const marca = 'bmw';
+    return this.http.get<Car[]>(`https://api-coches.herokuapp.com/cars?marca=${marca}`).pipe(map(x => {
       return x.map(car => {
         return CocheListItem.parseFromCar(car);
       });
@@ -132,11 +133,23 @@ export class CochesService {
           return Coche.parseFromCar(car);
         }));
     } else {
-      return this.http.post<Car>('https://api-coches.herokuapp.com/cars/',  Car.parseFromCoche(coche))
+      return this.http.post<Car>('https://api-coches.herokuapp.com/cars/', Car.parseFromCoche(coche))
         .pipe(map(car => {
           return Coche.parseFromCar(car);
         }));
     }
 
+
   }
+
+  borrarCoche(id: string): Observable<boolean> {
+    return this.http.delete(`https://api-coches.herokuapp.com/cars/${id}`).pipe(map(x => {
+      console.log(x);
+      if (x) {
+        return true;
+      }
+      return false;
+    }))
+  }
+
 }
